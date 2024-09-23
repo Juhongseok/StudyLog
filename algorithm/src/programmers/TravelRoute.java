@@ -1,6 +1,13 @@
 package programmers;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -16,9 +23,38 @@ public class TravelRoute {
         };
 
         Solution solution = new Solution();
-        String[] result = solution.solution(tickets);
+        System.out.println(Arrays.toString(solution.solution(tickets)));
 
-        System.out.println(Arrays.toString(result));
+        Solution2 solution2 = new Solution2();
+        System.out.println(Arrays.toString(solution2.solution(tickets)));
+    }
+
+    static class Solution2 {
+        private Map<String, LinkedList<String>> graph = new HashMap<>();
+        private List<String> answer = new ArrayList<>();
+
+        public String[] solution(String[][] tickets) {
+            Arrays.sort(tickets, Comparator.comparing(o -> o[1]));
+
+            for (String[] ticket : tickets) {
+                String dep = ticket[0];
+                String des = ticket[1];
+
+                graph.computeIfAbsent(dep, k -> new LinkedList<>()).add(des);
+            }
+            dfs("ICN");
+            Collections.reverse(answer);
+
+            return answer.toArray(new String[0]);
+        }
+
+        private void dfs(String dep) {
+            while (graph.containsKey(dep) && !graph.get(dep).isEmpty()) {
+                dfs(graph.get(dep).poll());
+            }
+
+            answer.add(dep);
+        }
     }
 
     static class Solution {
