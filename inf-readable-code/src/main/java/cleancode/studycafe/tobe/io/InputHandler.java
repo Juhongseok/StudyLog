@@ -1,6 +1,5 @@
 package cleancode.studycafe.tobe.io;
 
-import cleancode.studycafe.tobe.exception.AppException;
 import cleancode.studycafe.tobe.model.StudyCafePass;
 import cleancode.studycafe.tobe.model.StudyCafePassType;
 
@@ -14,16 +13,7 @@ public class InputHandler {
     public StudyCafePassType getPassTypeSelectingUserAction() {
         String userInput = SCANNER.nextLine();
 
-        if ("1".equals(userInput)) {
-            return StudyCafePassType.HOURLY;
-        }
-        if ("2".equals(userInput)) {
-            return StudyCafePassType.WEEKLY;
-        }
-        if ("3".equals(userInput)) {
-            return StudyCafePassType.FIXED;
-        }
-        throw new AppException("잘못된 입력입니다.");
+        return StudyCafePassType.parse(userInput);
     }
 
     public StudyCafePass getSelectPass(List<StudyCafePass> passes) {
@@ -34,7 +24,7 @@ public class InputHandler {
 
     public boolean getLockerSelection() {
         String userInput = SCANNER.nextLine();
-        return "1".equals(userInput);
+        return LockerUseSelection.USE.isEqual(userInput);
     }
 
 }

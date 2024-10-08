@@ -18,12 +18,16 @@ public class StudyCafePass {
         return new StudyCafePass(passType, duration, price, discountRate);
     }
 
-    public StudyCafePassType getPassType() {
-        return passType;
+    public boolean isEqualType(StudyCafePassType type) {
+        return this.passType == type;
     }
 
-    public int getDuration() {
-        return duration;
+    public boolean isNotEqualType(StudyCafePassType type) {
+        return this.passType != type;
+    }
+
+    public boolean isEqual(StudyCafeLockerPass option) {
+        return option.getPassType() == passType && option.getDuration() == duration;
     }
 
     public int getPrice() {
@@ -35,16 +39,7 @@ public class StudyCafePass {
     }
 
     public String display() {
-        if (passType == StudyCafePassType.HOURLY) {
-            return String.format("%s시간권 - %d원", duration, price);
-        }
-        if (passType == StudyCafePassType.WEEKLY) {
-            return String.format("%s주권 - %d원", duration, price);
-        }
-        if (passType == StudyCafePassType.FIXED) {
-            return String.format("%s주권 - %d원", duration, price);
-        }
-        return "";
+        return passType.display(duration, price);
     }
 
 }
