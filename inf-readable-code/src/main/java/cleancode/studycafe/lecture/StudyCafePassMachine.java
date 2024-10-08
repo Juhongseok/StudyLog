@@ -21,7 +21,7 @@ public class StudyCafePassMachine {
             outputHandler.showWelcomeMessage();
             outputHandler.showAnnouncement();
 
-            StudyCafePass selectedPass = getSelectedPass();
+            StudyCafePass selectedPass = selectPass();
             Optional<StudyCafeLockerPass> optionalLockerPass = selectLockerPass(selectedPass);
 
             optionalLockerPass.ifPresentOrElse(
@@ -35,7 +35,7 @@ public class StudyCafePassMachine {
         }
     }
 
-    private StudyCafePass getSelectedPass() {
+    private StudyCafePass selectPass() {
         outputHandler.askPassTypeSelection();
         StudyCafePassType passType = inputHandler.getPassTypeSelectingUserAction();
 
@@ -50,12 +50,12 @@ public class StudyCafePassMachine {
         List<StudyCafePass> allPasses = studyCafeFileHandler.readStudyCafePasses();
 
         return allPasses.stream()
-                .filter(studyCafePass -> studyCafePass.getPassType() == studyCafePassType)
+                .filter(studyCafePass -> studyCafePass.isSamePassType(studyCafePassType))
                 .toList();
     }
 
     private Optional<StudyCafeLockerPass> selectLockerPass(StudyCafePass selectedPass) {
-        if (selectedPass.getPassType() != StudyCafePassType.FIXED) {
+        if (selectedPass.cannotUseLocker()) {
             return Optional.empty();
         }
 
@@ -77,10 +77,7 @@ public class StudyCafePassMachine {
         List<StudyCafeLockerPass> allLockerPasses = studyCafeFileHandler.readLockerPasses();
 
         return allLockerPasses.stream()
-            .filter(lockerPass ->
-                lockerPass.getPassType() == pass.getPassType()
-                    && lockerPass.getDuration() == pass.getDuration()
-            )
+            .filter(pass::isSameDurationType)
             .findFirst()
             .orElse(null);
     }
