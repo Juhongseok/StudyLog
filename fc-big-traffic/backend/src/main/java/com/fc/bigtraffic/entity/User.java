@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AccessLevel;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.cglib.core.Local;
 import org.springframework.data.annotation.CreatedDate;
@@ -16,6 +17,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
 
 @Entity
+@Getter
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
@@ -43,11 +45,10 @@ public class User {
     @LastModifiedDate
     private LocalDateTime updatedDate;
 
-    public User(String username, String password, String email, LocalDateTime lastLogin) {
+    public User(String username, String password, String email) {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.lastLogin = lastLogin;
     }
 
 }

@@ -24,9 +24,13 @@ repositories {
 }
 
 dependencies {
+	// web
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	// db
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	runtimeOnly 'com.mysql:mysql-connector-j'
+	// docs
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.1.0'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
