@@ -3,14 +3,18 @@ package com.fc.bigtraffic.controller;
 import com.fc.bigtraffic.controller.dto.CreateUserRequest;
 import com.fc.bigtraffic.controller.dto.IdResponse;
 import com.fc.bigtraffic.service.UserService;
+import com.fc.bigtraffic.service.dto.UserInfo;
 import io.swagger.v3.oas.annotations.Parameter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -18,6 +22,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     private final UserService userService;
+
+    @GetMapping
+    public List<UserInfo> getUsers() {
+        return userService.getAll();
+    }
 
     @PostMapping
     public IdResponse createUser(@RequestBody CreateUserRequest request) {
