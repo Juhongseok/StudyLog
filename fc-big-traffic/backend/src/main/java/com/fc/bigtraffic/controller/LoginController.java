@@ -7,6 +7,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -30,8 +31,20 @@ public class LoginController {
         setTokenInCookie(token, 3600, response);
     }
 
-    @PostMapping("/logout")
+    @PostMapping("/v1/logout")
     public void logout(HttpServletResponse response) {
+        setTokenInCookie(null, 0, response);
+    }
+
+    @PostMapping("/v2/logout")
+    public void blacklistLogout(@CookieValue(required = false, name = "Authorization") String token, HttpServletResponse response) {
+        jwtService.blacklistToken(token);
+        setTokenInCookie(null, 0, response);
+    }
+
+    @PostMapping("/v2/logout/all")
+    public void logoutAll(@CookieValue(required = false, name = "Authorization") String token, HttpServletResponse response) {
+        jwtService.blacklistTokenAll(token);
         setTokenInCookie(null, 0, response);
     }
 
