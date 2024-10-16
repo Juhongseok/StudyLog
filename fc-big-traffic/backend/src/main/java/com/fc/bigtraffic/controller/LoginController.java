@@ -3,6 +3,8 @@ package com.fc.bigtraffic.controller;
 import com.fc.bigtraffic.controller.dto.LoginRequest;
 import com.fc.bigtraffic.service.UserService;
 import com.fc.bigtraffic.jwt.JwtService;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,10 +23,25 @@ public class LoginController {
     private final UserService userService;
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequest request) {
+    public void login(@RequestBody LoginRequest request, HttpServletResponse response) {
         userService.checkUser(request.email(), request.password());
 
-        return jwtService.createToken(request.email());
+        String token = jwtService.createToken(request.email());
+        setTokenInCookie(token, 3600, response);
+    }
+
+    @PostMapping("/logout")
+    public void logout(HttpServletResponse response) {
+        setTokenInCookie(null, 0, response);
+    }
+
+    private void setTokenInCookie(String token, int maxAge, HttpServletResponse response) {
+        Cookie cookie = new Cookie("Authorization", token);
+        cookie.setPath("/");
+        cookie.setHttpOnly(true);
+        cookie.setMaxAge(maxAge);
+
+        response.addCookie(cookie);
     }
 
     @GetMapping("/token/validation")
