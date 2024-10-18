@@ -25,9 +25,8 @@ public class LoginController {
 
     @PostMapping("/login")
     public void login(@RequestBody LoginRequest request, HttpServletResponse response) {
-        userService.checkUser(request.email(), request.password());
-
-        String token = jwtService.createToken(request.email());
+        Long userId = userService.checkUser(request.email(), request.password());
+        String token = jwtService.createToken(userId, request.email());
         setTokenInCookie(token, 3600, response);
     }
 

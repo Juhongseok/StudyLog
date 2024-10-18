@@ -22,12 +22,13 @@ public class JwtService {
 
     private final JwtBlacklistRepository jwtBlacklistRepository;
 
-    public String createToken(String email) {
+    public String createToken(Long userId, String email) {
         Date now = new Date();
         Date expiresAt = new Date(now.getTime() + expirationTime);
 
         return JWT.create()
-                .withSubject(email)
+                .withSubject("big_data user token")
+                .withClaim("id", userId)
                 .withClaim("email", email)
                 .withIssuedAt(now)
                 .withExpiresAt(expiresAt)
@@ -44,8 +45,8 @@ public class JwtService {
         }
     }
 
-    public String getUserId(String token) {
-        return JWT.decode(token).getClaim("email").asString();
+    public Long getUserId(String token) {
+        return JWT.decode(token).getClaim("id").asLong();
     }
 
     public void blacklistToken(String token) {

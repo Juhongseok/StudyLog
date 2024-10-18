@@ -33,11 +33,13 @@ public class UserService {
                 .toList();
     }
 
-    public void checkUser(String email, String password) {
+    public Long checkUser(String email, String password) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("User with email " + email + " does not exist"));
 
         passwordEncoder.matches(password, user.getPassword());
+
+        return user.getId();
     }
 
 }
