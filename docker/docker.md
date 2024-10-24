@@ -85,10 +85,63 @@ Guest OS의 실행에 소요되는 오버헤드가 없기 때문에 고속으로
 - 도커 엔진: 도커 플랫폼의 핵심 구성요소, 주로 도커데몬, cli(클라이언트), containerd등의 구성요소로 이루어져있음
   - Docker가 전체적인 플랫폼을 의미하면 도커엔진이 플랫폼의 핵심 부분을 의미
 
-## Docker 사용법
+## 기본적인 도커 명령어
+- 명령어 구조 : docker [대상] [액션]
+  - 대상: container(생략가능), image, volume, network등
+  - 액션: ls, run, start 등
+
+### 도커 이미지
+[도커 허브](https://hub.docker.com/)에서 이미지를 확인할 수 있음<br>
+혹은 cli search 명령어로 간단하게 확인할 수 있다
+
+```bash
+docker search mysql
+```
+![dockerSearch](dockerSearch.png)
+
+```
+**간단한 흐름**<br>
+Registry <--> Images <--> Container
+
+
+이러한 이미지들은 도커 레지스트리에 저장이 되는데 public, private 두가지로 나뉘게 됨<br>
+public 에는 대표적으로 도커허브, AWS Container Registry 등이 있음<br>
+사용자가 직접 레지스트리를 구축해서 자신의 내부망에서 사용하거나 외부망과 연결해서 사용 가능<br>
+이미지는 그 자체로 사용할 수 없고 컨테이너에 추가해야지 사용 가능
+
+이미지에 태그를 작성하는데 이는 이미지 버전을 기록, 만일 태그가 없다면 도커엔진은 latest로 인식
+```
+
+
+- **이미지 다운로드**
+  -  docker image pull
+- **다운로드한 이미지 확인**
+  - docker images, docker image ls
+- **docker file로부터 이미지 생성**
+  - docker build -t [사용자명/이미지명:tag] . 
+  - 단! 도커 파일 있는 위치에서 하기 경로지정 귀찮..
+- **컨테이너로 이미지 생성**
+  - docker container commit -m "commit message" -a "user" [container_name] [사용자명/이미지명:tag]
+- **이미지 registry 업로드**
+  - docker push [사용자명/이미지명:tag]
+  - docker login 선행, 이미지 이름을 사용자명:이미지명으로 변경 해야함
+- **이미지 태그 설정**
+  - docker tag [이미지명] [바꿀이름]
+- **이미지 삭제**
+  - docker image rm [이미지명]
+
+![imagePull](imagePull.png)
+
+### 도커 컨테이너
+- docker (container) create: 생성하고 자동으로 시작하지는 않음
+
+## 도커 파일
 
 
 # 더 찾아볼 내용
 - Docker가 어떻게 격리된 환경을 제공하는지
   - cgroup, namespace
 - Docker 원격 접근
+- Linux도 공부하면 좋을 듯
+- 네트워크
+- 도커 레지스트리 private 구축
