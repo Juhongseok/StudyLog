@@ -133,7 +133,47 @@ public 에는 대표적으로 도커허브, AWS Container Registry 등이 있음
 ![imagePull](imagePull.png)
 
 ### 도커 컨테이너
-- docker (container) create: 생성하고 자동으로 시작하지는 않음
+- **컨테이너 생성**
+  - docker (container) create: 생성하고 자동으로 시작하지는 않음
+  - 옵션 -it 써서 내부 파일시스템 접근 가능하도록 쉘 연결 해두기
+- **컨테이너 확인**
+  - docker (container) ls
+  - 실행 중인 컨테이너 목록
+  - 옵션 -a 사용 시 실행중이지 않은 컨테이너까지 모두 보여줌
+- **컨테이너 시작**
+  - docker start
+- **컨테이너 종료**
+  - docker stop
+- **컨테이너 시작하고 Command 실행**
+  - docker run 
+  - create + start 두개 합친 것
+- **컨테이너 삭제**
+  - docker rm
+
+### 도커 볼륨
+- 컨테이너 생성 시 `-v  ${docker volume 이름}:${컨테이너가 내부에서 사용할 경로}` 옵션을 통해 볼륨을 연결(없으면 생성)
+- docker volume create 사용해서 생성
+
+그럼 마운트 된 디렉토리는 호스트의 어디에 위치하는지
+
+#### 마운트 타입
+![dockervolume](dockervolume.webp)
+
+- bind
+  - 호스트 시스템의 선언된 디렉터리가 컨테이너에 마운트 됨
+  - 본인 환경에 맞게 사용 가능하지만 경로 분산
+- volume
+  - docker에서 관리하는 호스트 파일 시스템의 일부 (linux의 경우 /var/lib/docker/volumes/)에 저장
+  - docker container에서 생성한 데이터들은 volumes/${docker volume name}/_data 파일 하위에 들어가게됨
+- tmpfs
+  - 호스트 시스템의 메모리에 저장
+  - 비영구 상태 데이터 저장시에 좋음
+
+### 도커 외부와 통신 방법
+- 컨테이너 생성 시 -p ${host port number}:${container port number} 작성
+
+### 도커 네트워크
+
 
 ## 도커 파일
 
