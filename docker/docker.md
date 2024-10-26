@@ -72,7 +72,7 @@ Guest OS의 실행에 소요되는 오버헤드가 없기 때문에 고속으로
 3. 확장성
 4. 격리된 환경
 
-![docker](docker-architecture.png)
+![docker](images/docker-architecture.png)
 
 ## Docker 용어
 - 도커 클라이언트: 도커 데몬에게 도커 API로 빌드, 실행, 설치를 요청하는 프로세서
@@ -97,7 +97,7 @@ Guest OS의 실행에 소요되는 오버헤드가 없기 때문에 고속으로
 ```bash
 docker search mysql
 ```
-![dockerSearch](dockerSearch.png)
+![dockerSearch](images/dockerSearch.png)
 
 ```
 **간단한 흐름**<br>
@@ -130,7 +130,7 @@ public 에는 대표적으로 도커허브, AWS Container Registry 등이 있음
 - **이미지 삭제**
   - docker image rm [이미지명]
 
-![imagePull](imagePull.png)
+![imagePull](images/imagePull.png)
 
 ### 도커 컨테이너
 - **컨테이너 생성**
@@ -157,7 +157,7 @@ public 에는 대표적으로 도커허브, AWS Container Registry 등이 있음
 그럼 마운트 된 디렉토리는 호스트의 어디에 위치하는지
 
 #### 마운트 타입
-![dockervolume](dockervolume.webp)
+![dockervolume](images/dockervolume.webp)
 
 - bind
   - 호스트 시스템의 선언된 디렉터리가 컨테이너에 마운트 됨
@@ -173,15 +173,29 @@ public 에는 대표적으로 도커허브, AWS Container Registry 등이 있음
 - 컨테이너 생성 시 -p ${host port number}:${container port number} 작성
 
 ### 도커 네트워크
+기본 3개의 네트워크 드라이버존재
+- bridge
+  - 기본 네트워크 드라이버로 컨테이너 실행 시 별도 지정 없을 경우 사용
+  - iptables를 기반으로 변환됨
+  - 컨테이너 생성 후 nat 테이블 조회 시 docker chain이 생성되어 설정이 됨
+- host
+  - 컨테이너와 호스트 간 네트워크 격리 제거
+  - 브릿지를 거치지 않아 응답속도 높지만 보안 위험 있음
+- none
+  - 네트워크 사용하고 싶지 않을 때 사용
 
+#### 사용자 정의 네트워크
+기본적으로 docker0라는 브릿지 네트워크가 제공되는데 이 외에도 커스텀한 브릿지 네트워크 생성 가능
 
-## 도커 파일
+docker0 브릿지에서는 각 컨테이너에 고정 ip 할당을 할 수 없고 각 컨테이너끼리 통신 시 ip를 작성을 해줘야하지만<br>
+사용자 정의 네트워크에서는 ip가 아닌 컨테이너 이름을 통해 통신 가능
 
+![customnetwork](images/customnetwork.png)
 
 # 더 찾아볼 내용
 - Docker가 어떻게 격리된 환경을 제공하는지
   - cgroup, namespace
 - Docker 원격 접근
 - Linux도 공부하면 좋을 듯
-- 네트워크
+- 네트워크 (리눅스 네트워크)
 - 도커 레지스트리 private 구축
