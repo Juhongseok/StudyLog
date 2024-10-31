@@ -9,3 +9,7 @@
 - Docker 원격 접근
 - Linux
 - 네트워크 (리눅스 네트워크)
+- nginx vs apache
+- nginx 구조, 작동 원리
+- systemctl vs service
+- 로드밸런싱 종류 (라운드 로빈)
