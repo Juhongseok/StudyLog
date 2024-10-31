@@ -64,6 +64,60 @@ sudo service nginx restart
 - /etc/nginx/sites-enabled: 활성화된 서버 블록 심볼릭 링크(`ln -s`) 저장소
   `sudo ln -s /etc/nginx/sites-available/sample.conf /etc/nginx/sites-enabled/`
 
+## 리버스 프록시 구성
+```bash
+server {
+    listen 80;
+    listen [::]:80;
+    server_name dev.jhs.com;
+
+    location / {
+        proxy_pass http://localhost:3000;
+        
+        # 거의 자주 사용하는 5가지 옵션
+        # 네트워크 정책때문에 변경 될 가능성 있음
+        proxy_redirect off;
+        proxy_set_header Host $host; 
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Host $server_name;
+    }
+}
+```
+- proxy_pass ${URL}: Proxied Server Protocol and Address, 리버스 프록시 구성
+- proxy_redirect ${value}: 프록시 된 서버에 의해 발생된 리다이렉션에 대해 Location Header에 나타나는 URL 재작성
+  - off: 설정 그대로 전달
+- proxy_set_header ${field} ${value}: 프록시 된 서버에 전달된 요청 헤더에 필드를 재정의하거나 추가 가능
+
+## 로드밸런싱 (upstream) 설정
+```bash
+server {
+    listen 80;
+    listen [::]:80;
+    server_name dev.jhs.com;
+
+    location / {
+        proxy_pass http://backend_server:8080;
+        
+        # 거의 자주 사용하는 5가지 옵션
+        # 네트워크 정책때문에 변경 될 가능성 있음
+        proxy_redirect off;
+        proxy_set_header Host $host; 
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Host $server_name;
+    }
+
+    upstream backend_server {
+        server 172.168.32.101:8080;
+        server 172.168.32.102:8080;
+        server 172.168.32.103:8080;
+    }
+}
+```
+- upstream: 서버 그룹을 정의
+  - 서버 이름과 proxy_pass 이름 매칭해서 서버 중 하나로 요청 보냄
+  - 기본은 라운드 로빈으로 밸런싱 진행
 
 # 참고
 [proxyServer](./proxyServer.md)
@@ -73,3 +127,4 @@ sudo service nginx restart
 - nginx vs apache
 - nginx 구조, 작동 원리
 - systemctl vs service
+- 로드밸런싱 종류 (라운드 로빈)
