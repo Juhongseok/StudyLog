@@ -1,0 +1,77 @@
+# 클라우드 컴퓨팅 개념 및 NHN Cloud 소개
+종량 과금제: 사용한 만큼만 비용 지불
+
+## 온프레미스
+1. 초기 투자비용 많음
+2. 데이터센터, 인프라 관리
+3. 용량 고정
+4. 준비에 부담, 비용
+5. 한정된 리전
+
+## 클라우드
+1. 적은 초기 투자 비용
+2. 비지니스에만 집중 가능(빠른 준비) --> 생산성 강화, 속도 증진
+3. 유연한 용량, 탄력성
+4. 여러 리전 사용
+
+### Public Cloud
+1. 인터넷만 있으면 바로 사용 가능
+2. 초기 자본 지출 업음
+3. 신속한 프로비저닝 가능
+4. CSP가 컴퓨팅 리소스 소유 및 운영
+5. 종량과금제 방식
+
+### Private Cloud
+1. 온프레미스 데이터센터에 장비 구축해서 전용 private cloud 서비스 형태로 구성
+2. 독점적 사용 방식
+3. 초기에 하드웨어 구매 필요
+4. 조직이 리소스, 보안 제어, 유지 관리 업데이트 담당
+
+### Hybrid Cloud
+1. Public Cloud + Private Cloud
+2. Public Cloud + On-Premise
+
+### Multi Cloud
+1. 여러 클라우드 서비스 활용 (AWS, NHN, AZURE)
+
+### Iaas, Paas, Saas
+
+### 구성요소, 사용범위에 따른 서비스 분류
+
+# 조직과 프로젝트
+- Console
+- 조직: 효율적으로 관리하기 위한 그룹
+- 조직 구성 방식 : 회사단위, 비지니스단위
+- 프로젝트: 실 서비스 구축할 공간 단위
+- CloudTrail 무료 제공
+- NHN Cloud 콘솔, IAM 콘솔
+- 도메인 이름 별도 생성 필수 (aws에서는 자동으로 만들어주지않나..흠...)
+
+# 네트워크
+- Private IP, Public IP
+- VPC
+- CIDR
+- Public Subnet, Private Subnet
+- 하나의 VPC에서 Subnet끼리는 통신 가능 -> LocalGateway포함한 RoutingTable 덕분
+- 필요하면 RoutingTable 별도 구성 필요
+- InternetGateway : 외부에서 접속 경로, Gateway는 RoutingTable에 명시 필수
+- RoutingTable
+- Floating IP: 고정된 공인 IP 생성
+- Security Groups: Default All Deny, Instance와 바인딩
+- Network ACL: VPC와 바인딩, Security Groups보다 우선순위 높음, 허용/차단/송신/수신 설정 가능, 내부 규칙 우선순위 설정 가능
+- NACL -> Routing Table -> Security Groups -> Instance OS FireWall -> Instance 디버깅 순서
+- Nat Gateway: outbound만 허용
+- Service Gateway: VPC 외부에서 생성된 서비스 접근
+- Peering Gateway: VPC 끼리 통신 가능
+- DNS+
+
+# 컴퓨팅
+- Instance
+  - Image
+  - AZ
+  - KeyPair
+  - USer Script
+
+# 스토리지 & 데이터베이스
+
+# 요금
