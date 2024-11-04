@@ -6,18 +6,25 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.concurrent.FutureTask;
 
 import static thread.util.MyLogger.log;
 import static thread.util.ThreadUtils.sleep;
 
-public class CallableMainV1 {
+public class CallableMainV2 {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         ExecutorService executorService = Executors.newFixedThreadPool(2);
+        log("submit() 호출");
         Future<Integer> future = executorService.submit(new MyCallable());
-        Integer result = future.get();
+
+        log("future 즉시 반환, future = " + future);
+
+        log("future.get() [블로킹] 메서드 호출 시작 -> main 스레드 WAITING");
+        Integer result = future.get(); // 블로킹 메소드
+        log("future.get() [블로킹] 메서드 호출 완료 -> main 스레드 RUNNABLE");
+
         log("result value = " + result);
+        log("future 완료, future = " + future);
         executorService.close();
     }
 
