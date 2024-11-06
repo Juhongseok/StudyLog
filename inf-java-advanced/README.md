@@ -52,3 +52,13 @@ Future 반환한다면 나중에 `get()`을 호출 할 때 완료가 되지 않�
 여러 작업을 `ExecutorService`에 요청할 수 있음
 
 **가능하면 실행해야할 작업을 모두 요청이 끝난 후에 결과 값을 받아오자!!**
+
+## ExecutorService
+- corePoolSize
+  - 기본으로 pool 내에 존재하는 thread 갯수 지정
+- workQueue
+  - corePoolSize 만큼 작업이 실행중일 경우 대기하는 queue, queue 초기 생성 시 사이즈 지증
+- maximumPoolSize
+  - corePoolSize 만큼 작업 실행중이고 queue 사이즈 만큼 대기 중일 경우 추가로 pool 내에 thread 생성 가능한 갯수 (긴급한 상황)
+- keepAliveTime
+  - corePoolSize 넘어서 만들어진 thread가 작업을 받지않고 대기 가능한 시간
