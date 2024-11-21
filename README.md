@@ -15,3 +15,4 @@
   - systemctl vs service
   - 시스템 콜
 - 로드밸런싱 종류 (라운드 로빈)
+- Socket
