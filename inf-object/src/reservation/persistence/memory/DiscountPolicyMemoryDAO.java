@@ -1,6 +1,6 @@
 package reservation.persistence.memory;
 
-import reservation.domain.DiscountPolicy;
+import reservation.domain.v1.DiscountPolicy;
 import reservation.persistence.DiscountPolicyDAO;
 
 public class DiscountPolicyMemoryDAO extends InMemoryDAO<DiscountPolicy> implements DiscountPolicyDAO {

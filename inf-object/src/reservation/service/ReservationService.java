@@ -1,18 +1,15 @@
 package reservation.service;
 
 import generic.Money;
-import reservation.domain.DiscountCondition;
-import reservation.domain.DiscountPolicy;
-import reservation.domain.Movie;
-import reservation.domain.Reservation;
-import reservation.domain.Screening;
+import reservation.domain.v1.DiscountPolicy;
+import reservation.domain.v1.Movie;
+import reservation.domain.v1.Reservation;
+import reservation.domain.v1.Screening;
 import reservation.persistence.DiscountConditionDAO;
 import reservation.persistence.DiscountPolicyDAO;
 import reservation.persistence.MovieDAO;
 import reservation.persistence.ReservationDAO;
 import reservation.persistence.ScreeningDAO;
-
-import java.util.List;
 
 public class ReservationService {
 

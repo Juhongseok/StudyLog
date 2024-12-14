@@ -1,6 +1,6 @@
 package reservation.persistence.memory;
 
-import reservation.domain.Movie;
+import reservation.domain.v1.Movie;
 import reservation.persistence.MovieDAO;
 
 public class MovieMemoryDAO extends InMemoryDAO<Movie> implements MovieDAO {

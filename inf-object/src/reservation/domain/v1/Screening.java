@@ -1,4 +1,4 @@
-package reservation.domain;
+package reservation.domain.v1;
 
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;

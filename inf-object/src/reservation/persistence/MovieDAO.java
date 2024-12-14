@@ -1,6 +1,6 @@
 package reservation.persistence;
 
-import reservation.domain.Movie;
+import reservation.domain.v1.Movie;
 
 public interface MovieDAO {
     Movie selectMovie(Long movieId);

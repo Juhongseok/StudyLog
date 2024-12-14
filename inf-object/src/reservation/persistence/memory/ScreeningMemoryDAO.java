@@ -1,6 +1,6 @@
 package reservation.persistence.memory;
 
-import reservation.domain.Screening;
+import reservation.domain.v1.Screening;
 import reservation.persistence.ScreeningDAO;
 
 public class ScreeningMemoryDAO extends InMemoryDAO<Screening> implements ScreeningDAO {

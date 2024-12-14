@@ -1,6 +1,6 @@
 package reservation.persistence;
 
-import reservation.domain.DiscountCondition;
+import reservation.domain.v1.DiscountCondition;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package reservation.domain;
+package reservation.domain.v1;
 
 import generic.Money;
 

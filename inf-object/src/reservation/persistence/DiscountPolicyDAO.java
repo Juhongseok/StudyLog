@@ -1,6 +1,6 @@
 package reservation.persistence;
 
-import reservation.domain.DiscountPolicy;
+import reservation.domain.v1.DiscountPolicy;
 
 public interface DiscountPolicyDAO {
     DiscountPolicy selectDiscountPolicy(Long movieId);

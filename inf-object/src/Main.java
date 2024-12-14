@@ -1,9 +1,9 @@
 import generic.Money;
-import reservation.domain.DiscountCondition;
-import reservation.domain.DiscountPolicy;
-import reservation.domain.Movie;
-import reservation.domain.Reservation;
-import reservation.domain.Screening;
+import reservation.domain.v1.DiscountCondition;
+import reservation.domain.v1.DiscountPolicy;
+import reservation.domain.v1.Movie;
+import reservation.domain.v1.Reservation;
+import reservation.domain.v1.Screening;
 import reservation.persistence.DiscountConditionDAO;
 import reservation.persistence.DiscountPolicyDAO;
 import reservation.persistence.MovieDAO;
@@ -21,9 +21,9 @@ import java.time.LocalDateTime;
 import static java.time.DayOfWeek.MONDAY;
 import static java.time.DayOfWeek.WEDNESDAY;
 import static java.time.LocalTime.of;
-import static reservation.domain.DiscountCondition.ConditionType.PERIOD_CONDITION;
-import static reservation.domain.DiscountCondition.ConditionType.SEQUENCE_CONDITION;
-import static reservation.domain.DiscountPolicy.PolicyType.AMOUNT_POLICY;
+import static reservation.domain.v1.DiscountCondition.ConditionType.PERIOD_CONDITION;
+import static reservation.domain.v1.DiscountCondition.ConditionType.SEQUENCE_CONDITION;
+import static reservation.domain.v1.DiscountPolicy.PolicyType.AMOUNT_POLICY;
 
 public class Main {
 

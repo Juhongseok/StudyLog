@@ -1,6 +1,6 @@
 package reservation.persistence.memory;
 
-import reservation.domain.DiscountCondition;
+import reservation.domain.v1.DiscountCondition;
 import reservation.persistence.DiscountConditionDAO;
 
 import java.util.List;
